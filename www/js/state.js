@@ -38,6 +38,15 @@ function freshState() {
     sceneBlueprint: null,
     blueprintHistory: [],
     intentHistory: [],
+    beatState: {
+      eventId: null,
+      index: 0,
+      momentum: 20,
+      beats: [],
+      extended: false,
+      actionCount: 0
+    },
+    beatHistory: [],
     reputation: 0,
     met: ["reina"],
     memories: [],

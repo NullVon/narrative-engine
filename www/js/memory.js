@@ -65,6 +65,7 @@ function applyEffects(effects = []) {
 
 function chooseOption(choice) {
   playBeep(430, 45);
+  if (state.beatState?.eventId) recordBeatAction("scripted_choice", choice.roll ? 8 : 6);
 
   if (choice.roll) {
     showDiceForChoice(choice);

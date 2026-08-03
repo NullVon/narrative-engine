@@ -9,7 +9,7 @@ const CAMPAIGN = {
   meta: {
     id: "kisaragi_academy",
     title: "Kisaragi Academy",
-    version: "1.1",
+    version: "1.2",
     adultCast: true,
     maxDemoDays: 3
   },

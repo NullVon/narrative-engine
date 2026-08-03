@@ -155,6 +155,10 @@ function freeActionNarration(parsed, blueprint) {
 
 function applyFreeAction(parsed) {
   const blueprint = state.sceneBlueprint;
+  if (state.beatState?.eventId) {
+    const momentum = parsed.primaryIntent === "leave" || parsed.primaryIntent === "refuse" ? -8 : parsed.primaryIntent === "help" || parsed.primaryIntent === "flirt" ? 8 : 5;
+    recordBeatAction(parsed.primaryIntent, momentum);
+  }
   const target = parsed.target;
 
   if (target && state.relationships[target] !== undefined) {

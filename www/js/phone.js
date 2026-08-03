@@ -26,6 +26,7 @@ function updatePhone() {
   updatePlanner();
   updateCommitments();
   updateBlueprint();
+  updateBeatFlow();
   updateIntentLog();
   updateSocialWeb();
   updateRumors();
@@ -321,6 +322,7 @@ function updateDataInspector() {
       Commitment history: ${state.commitmentHistory.length}<br>
       Blueprint history: ${state.blueprintHistory.length}<br>
       Intent history: ${state.intentHistory.length}<br>
+      Beat history: ${state.beatHistory.length}<br>
       Current blueprint: ${state.sceneBlueprint ? state.sceneBlueprint.event.id : "none"}<br>
       Calendar date: ${formattedDate()}<br>
       Event history entries: ${state.eventHistory.length}<br>

@@ -49,10 +49,10 @@ function render() {
       }
     };
   }
-  if (freeActionBox) freeActionBox.style.display = state.currentResult || state.demoComplete ? "none" : "block";
+  if (freeActionBox) freeActionBox.style.display = state.currentResult || state.demoComplete || isResolutionBeat() ? "none" : "block";
 
   if (state.demoComplete) {
-    title.textContent = "v1.1 Demo Complete";
+    title.textContent = "v1.2 Demo Complete";
     story.textContent =
       "You completed three simulated days.\n\n" +
       "Replay to see different Director selections, callbacks, relationship variants, and memory updates.\n\n" +
@@ -69,6 +69,7 @@ function render() {
   if (event && (!state.sceneBlueprint || state.sceneBlueprint.event.id !== event.id)) {
     buildSceneBlueprint(event);
   }
+  if (event) ensureBeatScene(event);
 
   if (!event) {
     title.textContent = "Engine Error";
@@ -76,23 +77,39 @@ function render() {
     return;
   }
 
-  title.textContent = event.title;
-  story.textContent = resolveEventText(event);
+  const beat = currentBeat();
+  title.textContent = beat?.title || event.title;
+  story.textContent = beat?.text || resolveEventText(event);
+
+  const beatBox = document.getElementById("beatBox");
+  if (beatBox) beatBox.style.display = "block";
+  const beatCounter = document.getElementById("beatCounter");
+  const momentumTag = document.getElementById("momentumTag");
+  const beatTitle = document.getElementById("beatTitle");
+  const beatText = document.getElementById("beatText");
+  if (beatCounter) beatCounter.textContent = `Beat ${state.beatState.index + 1} / ${state.beatState.beats.length}`;
+  if (momentumTag) momentumTag.textContent = `Momentum: ${state.beatState.momentum}`;
+  if (beatTitle) beatTitle.textContent = beat?.title || "";
+  if (beatText) beatText.textContent = beat?.kind === "opening" ? "Opening beat" : beat?.text || "";
 
   if (state.currentResult) {
     resultBox.style.display = "block";
     document.getElementById("resultTitle").textContent = state.currentResult.title;
     document.getElementById("resultText").textContent = state.currentResult.text;
-    document.getElementById("continueButton").onclick = continueAfterResult;
+    document.getElementById("continueButton").onclick = advanceBeat;
     return;
   }
 
-  event.choices.forEach(choice => {
-    const button = document.createElement("button");
-    button.textContent = choice.label;
-    button.onclick = () => chooseOption(choice);
-    choices.appendChild(button);
-  });
+  if (isOpeningBeat()) {
+    event.choices.forEach(choice => {
+      const button = document.createElement("button");
+      button.textContent = choice.label;
+      button.onclick = () => chooseOption(choice);
+      choices.appendChild(button);
+    });
+  } else {
+    renderBeatChoices(choices);
+  }
 }
 
 function initializeGame() {

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Narrative Engine v1.1 — Modular Refactor</title>
+<title>Narrative Engine v1.2 — Beat Engine</title>
 <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
@@ -32,6 +32,15 @@
       <h3 id="resultTitle"></h3>
       <div id="resultText"></div>
       <button class="primary center" id="continueButton" style="margin-top:12px">Continue</button>
+    </div>
+
+    <div id="beatBox" class="card" style="margin-top:14px">
+      <div class="tags">
+        <span class="tag" id="beatCounter">Beat 1</span>
+        <span class="tag" id="momentumTag">Momentum: 20</span>
+      </div>
+      <h3 id="beatTitle" style="margin-top:10px"></h3>
+      <div id="beatText"></div>
     </div>
 
     <div id="freeActionBox" class="card" style="margin-top:14px">
@@ -65,6 +74,7 @@
         <button onclick="showPanel('planner')">Planner</button>
         <button onclick="showPanel('commitments')">Commitments</button>
         <button onclick="showPanel('blueprint')">Scene Blueprint</button>
+        <button onclick="showPanel('beats')">Beat Flow</button>
         <button onclick="showPanel('intents')">Intent Log</button>
         <button onclick="showPanel('social')">Social Web</button>
         <button onclick="showPanel('rumors')">Rumors</button>
@@ -80,6 +90,7 @@
       <section class="panel" id="plannerPanel"><h2>Planner</h2><div id="plannerList"></div></section>
       <section class="panel" id="commitmentsPanel"><h2>Commitments</h2><div id="commitmentList"></div></section>
       <section class="panel" id="blueprintPanel"><h2>Scene Blueprint</h2><div class="small">Developer view of the structured scene facts.</div><div id="blueprintList"></div></section>
+      <section class="panel" id="beatsPanel"><h2>Beat Flow</h2><div class="small">Developer view of the current multi-beat scene.</div><div id="beatFlowList"></div></section>
       <section class="panel" id="intentsPanel"><h2>Intent Log</h2><div id="intentList"></div></section>
       <section class="panel" id="socialPanel"><h2>Social Web</h2><div id="socialList"></div></section>
       <section class="panel" id="rumorsPanel"><h2>Rumors</h2><div id="rumorList"></div></section>
@@ -106,6 +117,7 @@
 <script src="js/rules.js"></script>
 <script src="js/director.js"></script>
 <script src="js/memory.js"></script>
+<script src="js/beats.js"></script>
 <script src="js/intents.js"></script>
 <script src="js/dice.js"></script>
 <script src="js/time.js"></script>

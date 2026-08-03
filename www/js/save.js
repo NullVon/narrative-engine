@@ -38,6 +38,8 @@ function loadGame() {
     state.sceneBlueprint = state.sceneBlueprint || null;
     state.blueprintHistory = Array.isArray(state.blueprintHistory) ? state.blueprintHistory : [];
     state.intentHistory = Array.isArray(state.intentHistory) ? state.intentHistory : [];
+    state.beatState = state.beatState || {eventId:null,index:0,momentum:20,beats:[],extended:false,actionCount:0};
+    state.beatHistory = Array.isArray(state.beatHistory) ? state.beatHistory : [];
     seedCommitmentsIfNeeded();
     refreshCommitmentStatuses();
     pendingRollChoice = null;
