@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Narrative Engine v1.1 — Modular Refactor</title>
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div class="wrap">
+  <div class="box">
+    <div id="header"></div>
+    <div class="tags">
+      <span class="tag" id="weatherTag"></span>
+      <span class="tag" id="metTag"></span>
+      <span class="tag" id="bondTag"></span>
+      <span class="tag" id="saveTag"></span>
+    </div>
+  </div>
+
+  <div class="box">
+    <h1 id="title"></h1>
+    <div id="story"></div>
+
+    <div id="diceBox">
+      <div class="small" id="dicePrompt"></div>
+      <div id="die">—</div>
+      <button class="primary center" id="rollButton">Roll d20</button>
+    </div>
+
+    <div id="resultBox">
+      <h3 id="resultTitle"></h3>
+      <div id="resultText"></div>
+      <button class="primary center" id="continueButton" style="margin-top:12px">Continue</button>
+    </div>
+
+    <div id="freeActionBox" class="card" style="margin-top:14px">
+      <h3 style="margin-bottom:8px">Free Action</h3>
+      <div class="small">Describe what you do in your own words. The engine will classify your intent.</div>
+      <textarea id="freeActionInput" rows="3" style="width:100%;margin-top:10px;padding:10px;border-radius:10px;border:1px solid #475569;background:#0f172a;color:white;font:inherit" placeholder="Example: I apologize to Reina and offer to carry the paperwork."></textarea>
+      <button class="primary center" id="freeActionButton" style="margin-top:10px">Submit Action</button>
+      <div id="intentPreview" class="small" style="margin-top:10px"></div>
+    </div>
+
+    <div class="choices" id="choices"></div>
+  </div>
+
+  <div class="box">
+    <button class="primary center" onclick="openPhone()">📱 Open Phone</button>
+  </div>
+</div>
+
+<div class="modal" id="phoneModal">
+  <div class="phone">
+    <div class="phone-head">
+      <strong>MyPhone</strong>
+      <button style="width:auto;padding:6px 10px" onclick="closePhone()">✕</button>
+    </div>
+    <div class="phone-screen">
+      <div class="tabs">
+        <button onclick="showPanel('contacts')">Contacts</button>
+        <button onclick="showPanel('memories')">Memories</button>
+        <button onclick="showPanel('calendar')">Calendar</button>
+        <button onclick="showPanel('messages')">Messages</button>
+        <button onclick="showPanel('planner')">Planner</button>
+        <button onclick="showPanel('commitments')">Commitments</button>
+        <button onclick="showPanel('blueprint')">Scene Blueprint</button>
+        <button onclick="showPanel('intents')">Intent Log</button>
+        <button onclick="showPanel('social')">Social Web</button>
+        <button onclick="showPanel('rumors')">Rumors</button>
+        <button onclick="showPanel('director')">Director Log</button>
+        <button onclick="showPanel('data')">Data Inspector</button>
+        <button onclick="showPanel('settings')">Settings</button>
+      </div>
+
+      <section class="panel on" id="contactsPanel"><h2>Contacts</h2><div id="contactsList"></div></section>
+      <section class="panel" id="memoriesPanel"><h2>Memories</h2><div id="memoryList"></div></section>
+      <section class="panel" id="calendarPanel"><h2>Calendar</h2><div id="calendarList"></div></section>
+      <section class="panel" id="messagesPanel"><h2>Messages</h2><div id="messageList"></div></section>
+      <section class="panel" id="plannerPanel"><h2>Planner</h2><div id="plannerList"></div></section>
+      <section class="panel" id="commitmentsPanel"><h2>Commitments</h2><div id="commitmentList"></div></section>
+      <section class="panel" id="blueprintPanel"><h2>Scene Blueprint</h2><div class="small">Developer view of the structured scene facts.</div><div id="blueprintList"></div></section>
+      <section class="panel" id="intentsPanel"><h2>Intent Log</h2><div id="intentList"></div></section>
+      <section class="panel" id="socialPanel"><h2>Social Web</h2><div id="socialList"></div></section>
+      <section class="panel" id="rumorsPanel"><h2>Rumors</h2><div id="rumorList"></div></section>
+      <section class="panel" id="directorPanel"><h2>Director Log</h2><div class="small">This developer view explains rule checks and event weights.</div><div id="directorList"></div></section>
+      <section class="panel" id="dataPanel"><h2>Data Inspector</h2><div id="dataList"></div></section>
+      <section class="panel" id="settingsPanel">
+        <h2>Settings</h2>
+        <div class="actions">
+          <button class="center" onclick="saveGame()">💾 Save</button>
+          <button class="center" onclick="loadGame()">📂 Load</button>
+          <button class="center" onclick="restartGame()">↻ Restart</button>
+          <button class="center" onclick="toggleSound()">🔊 Sound</button>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="data/campaign.js"></script>
+<script src="js/state.js"></script>
+<script src="js/helpers.js"></script>
+<script src="js/blueprint.js"></script>
+<script src="js/rules.js"></script>
+<script src="js/director.js"></script>
+<script src="js/memory.js"></script>
+<script src="js/intents.js"></script>
+<script src="js/dice.js"></script>
+<script src="js/time.js"></script>
+<script src="js/save.js"></script>
+<script src="js/phone.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
